@@ -10,28 +10,120 @@
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="home.html"><img src="logo-1.png" style="max-height: 180%;"></a>
+            <a class="navbar-brand" href="home.html"><img src = "logo-1.png" style ="max-height: 180%"></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="home.html"><img src="home.png" style="max-width: 35px;"></a></li>
-            <li class="active"><a href="#"><img src="magnifyingglass.png" style="max-width: 35px;"><span class="sr-only">(current)</span></a></li>
-            <li><a href="tickets.html"><img src="tickets.png" style="max-width: 35px;"></a></li>
-            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 35px;"></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+
+        <form class="navbar-form navbar-left">
+          <div align = "center" class="form-group">
+            <input type="text" list="names" class="form-control" placeholder="Search" autocomplete="on">
+              <datalist id="names">
+                <option value="Teddy Kim">
+                <option value="Kyle Kramer">
+                <option value="Tim Gamble">
+                <option value="Code for Good">
+             </datalist>
+          </div>
+           <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+           <span class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img src="notification.png" style="max-width: 22px;">
+                          <span class="caret"></span>
+              </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="float: left;">
+                  <li>Milestone Projects soon!</li>
+                  <li>No class tomorrow</li>
+                  <li>Code for Good is good</li>
+                </ul>
+            </span>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html"><img src="home.png" style="max-width: 22px;"></a></li>
+          <li class="active"><a href="#"><img src="magnifyingglass.png" style="max-width: 22px;"></a></li>
+            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 22px;"> </a></li>
+            <!-- <li><a align = "right" style="padding: 0 0 0 0;" href="profile.html"> Teddy Kim <br /> Tickets: 52 </a></li> -->
+        </ul>
       </div>
     </nav>
 
-    <div style = "text-align: center;">
 
-      <h1 style="font-size: 30px; white-space: nowrap; margin-top: 100px;">find your friends</h1>
-      <input type="text" name="search" placeholder="Search...">
-    </div>
+<style>
+* {
+  box-sizing: border-box;
+}
 
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+    </style>
+    </head>
+    <body>
+
+    <h2 style="margin-top: 70px; text-align: center;">Find Your Friends</h2>
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+    <ul id="myUL">
+      <li><a href="#">Henry</a></li>
+      <li><a href="#">Kart</a></li>
+
+      <li><a href="#">Kyle</a></li>
+      <li><a href="#">Marissa</a></li>
+
+      <li><a href="profile.html">Teddy</a></li>
+      <li><a href="#">Tim</a></li>
+    </ul>
+
+    <script>
+    function myFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+
+            }
+        }
+    }
+    </script>
 
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

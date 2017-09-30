@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pitch In</title>
+    <title>Pitch In - Profile</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/component.css" />
     <script src="js/modernizr.custom.js"></script>
@@ -41,10 +41,23 @@
              </datalist>
           </div>
            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+           <span class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img src="notification.png" style="max-width: 22px;">
+                          <span class="caret"></span>
+              </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="float: left;">
+                  <li>Milestone Projects soon!</li>
+                  <li>No class tomorrow</li>
+                  <li>Code for Good is good</li>
+                </ul>
+            </span>
         </form>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 25px;">  Teddy Kim</a></li>
+          <li><a href="home.html"><img src="home.png" style="max-width: 22px;"></a></li>
+          <li><a href="search.html"><img src="magnifyingglass.png" style="max-width: 22px;"></a></li>
+            <li class="active"><a href="#"><img src="smiley-face.png" style="max-width: 22px;">  Teddy Kim</a></li>
             <!-- <li><a align = "right" style="padding: 0 0 0 0;" href="profile.html"> Teddy Kim <br /> Tickets: 52 </a></li> -->
         </ul>
       </div>
@@ -65,12 +78,13 @@
                 <img class="media-object dp img-circle" src="profilepics/FB_IMG_1500407124562.jpg"
  style="width: 200px;height:200px;">
             </a>
+            
             <div class="media-body">
                 <h4 class="media-heading"> Teddy Kim </h4>
                 <h5>7th Grade </h5>
                 <h5>Achievements </h5>
 
-                                <style>
+                <style>
                     .img-thumbnail.achievement {
                       width: 32px;
                     }
@@ -80,18 +94,26 @@
 
                     }
                 </style>
-                <img src="icons/award.png"class="img-thumbnail achievement" alt="Achievement!">
-                <img src="icons/books.png"class="img-thumbnail achievement" alt="Achievement!">
-                <img src="icons/heart.png"class="img-thumbnail achievement" alt="Achievement!">
-                <img src="icons/sun.png"class="img-thumbnail achievement" alt="Achievement!">
-                <img src="icons/star.png"class="img-thumbnail achievement" alt="Achievement!">
+
+                <img src="icons/award.png"class="img-thumbnail achievement" alt="Achievement!" data-toggle="tooltip" title="Profile 100% Completed Badge">
+                <img src="icons/books.png"class="img-thumbnail achievement" alt="Achievement!" data-toggle="tooltip" title="Scholar Badge">
+                <img src="icons/heart.png"class="img-thumbnail achievement" alt="Achievement!" data-toggle="tooltip" title="Follow Your Passion Badge">
+                <img src="icons/sun.png"class="img-thumbnail achievement" alt="Achievement!" data-toggle="tooltip" title="High Attendance Badge">
+                <img src="icons/star.png"class="img-thumbnail achievement" alt="Achievement!" data-toggle="tooltip" title="Excellent Student Badge">
                 <hr style="margin:8px auto">
 
-                <span class="label label-default">All</span>
-                <span class="label label-default">Milestone</span>
-                <span class="label label-default">Achievements</span>
-                <span class="label label-default">Tickets</span>
+                <span class="label label-default">Baseball</span>
+                <span class="label label-default">Call of Duty</span>
+                <span class="label label-default">Soccer</span>
+                <span class="label label-default">New York Jets</span>
             </div>
+            <nav class="navbar navbar-default" style = " margin-top: 8px; margin-left: 210px; margin-right: 127px;">
+              <ul class="nav navbar-nav">
+                <li><a href="#" onClick="displayCategory('all')"> All </a></li>
+                <li><a href="#" onClick="displayCategory('achievement')"> Milestone </a></li>
+                <li><a href="#" onClick="displayCategory('milestone')"> Achievements </a></li>
+              </ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -171,6 +193,57 @@
       }
 
       
+function achievementOrMilestone() {
+  // randomly assign the post a type
+  if( Math.floor(Math.random() * 2) == 0) {
+    return "milestone";
+  }
+  else {
+    return "achievement";
+  }
+}
+
+function displayCategory(cat) {
+
+
+      var slides = document.getElementsByClassName('achievement');
+  for (var i = 0; i < slides.length; i++)
+  {
+    //slides[i].style.border = "10px solid #FF00FF";
+    slides[i].style.display = "inherit";
+  }
+    var slides = document.getElementsByClassName('milestone');
+  for (var i = 0; i < slides.length; i++)
+  {
+    //slides[i].style.border = "10px solid #FF00FF";
+    slides[i].style.display = "inherit";
+  
+  }
+  if (cat == 'milestone')
+  {
+      var slides = document.getElementsByClassName('achievement');
+  for (var i = 0; i < slides.length; i++)
+  {
+    //slides[i].style.border = "10px solid #FF00FF";
+    slides[i].style.display = "none";
+  }
+  }
+
+else if (cat == 'achievement')
+{
+    var slides = document.getElementsByClassName('milestone');
+  for (var i = 0; i < slides.length; i++)
+  {
+    //slides[i].style.border = "10px solid #FF00FF";
+    slides[i].style.display = "none";
+  }
+}
+
+
+
+
+}
+
       function generatePostings() {
         var images = JSON.parse(localStorage.getItem("userData") || "[]");
         if(images.length > 0) {
@@ -188,7 +261,7 @@
                     1,2,3,4,5,6,7,8,9,
                     1,2,3,4,5,6,7,8,9];
         for (var i = 0; i < list.length; i++) {
-          document.getElementById('grid').innerHTML += '<li><img src="projectpics/'+list[i]+'.jpg" style="width:304px;height:228px;"></li>';
+          document.getElementById('grid').innerHTML += '<li><img src="projectpics/'+list[i]+'.jpg" class='+achievementOrMilestone()+' style="width:304px;height:228px;"></li>';
         }
       }
 
