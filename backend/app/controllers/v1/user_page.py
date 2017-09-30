@@ -1,18 +1,28 @@
 
 from flask import abort, Blueprint, jsonify
 from app.utils import prepare_json_response
-from app import db, cache
+from flask.ext.mysql import MySQL
 
 from app.models.test import Courses
 
 import requests
 
 
-mod = Blueprint("v1_search", __name__, url_prefix="/v1/search")
+app = Flask(__name__)
+mysql = MySQL()
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'codeforgoodteam5'
+app.config['MYSQL_DATABASE_DB'] = 'codeforgood'
+app.config['MYSQL_DATABASE_HOST'] = '107.21.85.123'
 
+
+
+mysql.init_app(app)
+
+conn = mysql.connect()
 @mod.route("/profile", methods=['GET'])
 def user_setting():
-    cur = db.cursor()
+    cur = conn.cursor()
     display = {'errors ' : []}
     response = {}
     data = {}
@@ -33,6 +43,8 @@ def user_setting():
     data['birth'] = result[0]['birth']
     data['profile'] = result[0]['profile']
 
+
+    cur.execute('SELECT project_id, timestamp, description FROM Projects where user_id = %s',(username, ))
     return jsonify(
         prepare_json_response(
             message="OK",
@@ -44,7 +56,7 @@ def user_setting():
 @mod.route('/profile/edit', methods =['GET', 'POST'])
 def user_setting_edit():
     username = request.args.get('username')
-    cur = db.cursor()
+    cur = conn.cursor()
 
     if request.method == 'POST':
         if request.form['op'] == 'add':
@@ -60,7 +72,10 @@ def user_setting_edit():
 
             description = request.args.get('description')
             cur.execute("INSERT INTO Projects (project_name, user_id, timestamp, description) VALUES(%s, %s, NOW(), %s)", (project_name, username,description))
-        
+
+    if request.method  == 'PUT':
+
+
 
 
 
