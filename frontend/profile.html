@@ -109,9 +109,9 @@
             </div>
             <nav class="navbar navbar-default" style = " margin-top: 8px; margin-left: 210px; margin-right: 127px;">
               <ul class="nav navbar-nav">
-                <li><a href="#"> All </a></li>
-                <li><a href="#"> Milestone </a></li>
-                <li><a href="#"> Achievements </a></li>
+                <li><a href="#" onClick="displayCategory('all')"> All </a></li>
+                <li><a href="#" onClick="displayCategory('milestone')"> Milestone </a></li>
+                <li><a href="#" Achievements> Achievements </a></li>
               </ul>
             </nav>
         </div>
@@ -199,14 +199,14 @@ function achievementOrMilestone() {
     return "milestone";
   }
   else {
-    return "achievement";
+    return "post";
   }
 }
 
 function displayCategory(cat) {
 
 
-      var slides = document.getElementsByClassName('achievement');
+      var slides = document.getElementsByClassName('post');
   for (var i = 0; i < slides.length; i++)
   {
     //slides[i].style.border = "10px solid #FF00FF";
@@ -221,7 +221,7 @@ function displayCategory(cat) {
   }
   if (cat == 'milestone')
   {
-      var slides = document.getElementsByClassName('achievement');
+      var slides = document.getElementsByClassName('post');
   for (var i = 0; i < slides.length; i++)
   {
     //slides[i].style.border = "10px solid #FF00FF";
@@ -229,7 +229,7 @@ function displayCategory(cat) {
   }
   }
 
-else if (cat == 'achievement')
+else if (cat == 'post')
 {
     var slides = document.getElementsByClassName('milestone');
   for (var i = 0; i < slides.length; i++)
@@ -263,10 +263,6 @@ else if (cat == 'achievement')
         for (var i = 0; i < list.length; i++) {
           document.getElementById('grid').innerHTML += '<li><img src="projectpics/'+list[i]+'.jpg" class='+achievementOrMilestone()+' style="width:304px;height:228px;"></li>';
         }
-      }
-
-      function test() {
-        console.log(document.getElementById)
       }
 
 
