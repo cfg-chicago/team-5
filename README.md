@@ -1,2 +1,2 @@
 # team-5
-To start the application, open loginpage.html
+To start the application, open frontend/loginpage.html
