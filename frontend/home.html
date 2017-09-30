@@ -84,6 +84,12 @@ body  {
     <script type="text/javascript">
       
       function generatePostings() {
+        var images = JSON.parse(localStorage.getItem("userData") || "[]");
+        if(images.length > 0) {
+          for (var i = 0; i < images.length; i++) {
+            document.getElementById('grid').innerHTML += '<li><img src="'+images[i]+'" style="width:304px;height:228px;"></li>';
+          }
+        }
         var list = [1,2,3,4,5,6,7,8,9,
                     1,2,3,4,5,6,7,8,9,
                     1,2,3,4,5,6,7,8,9,
@@ -94,7 +100,6 @@ body  {
           document.getElementById('grid').innerHTML += '<li><img src="projectpics/'+list[i]+'.jpg" style="width:304px;height:228px;"></li>';
         }
       }
-
 
       generatePostings()
       new AnimOnScroll( document.getElementById( 'grid' ), {
