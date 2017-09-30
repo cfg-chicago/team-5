@@ -8,46 +8,49 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <!-- Style Sheet for Dynamic Tiling -->
+    <link rel="stylesheet" href="sandbox/tiles/masonry_layout/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+
+
+  
+    <!-- HEADER -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#"><img src="logo-1.png" style="max-height: 180%;"></a>
+            <a class="navbar-brand" href="#"><img src = "logo-1.png" style ="max-height: 150%"></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#"><img src="home.png" style="max-width: 35px;"><span class="sr-only">(current)</span></a></li>
-            <li><a href="search.html"><img src="magnifyingglass.png" style="max-width: 35px;"></a></li>
-            <li><a href="tickets.html"><img src="tickets.png" style="max-width: 35px;"></a></li>
-            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 35px;"></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+           <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 22px;"></a></li>
+        </ul>
       </div>
     </nav>
 
+    <!-- Profile Header -->
 
-
-
-  <div class="row" align="center" style="padding-top: 100px; border-radius: 15px; border: 2px solid #b9b9b9; padding-bottom: 100px">
+    <div class="row" align="center" style="padding-top: 100px; border-radius: 15px; border: 2px solid #b9b9b9; padding-bottom: 100px">
     <div class="col" align="left" style="width: 50%;">
       <img src="profilepics/Kartikeya.jpg" style="max-width: 50px; border-radius: 50%;">
-      <h7>Kartikeya Kandula</h2><br><br>
+      <h7 style="color:black;">Kartikeya Kandula</h2><br><br>
     </div>
     <div class="col" align="left" style="width: 50%;">
       <img src="meeting.jpg" style="width: 100%;">
     </div>
   </div>
 
-
-
-
   <footer class="bd-footer text-muted" style="background-color: #747474;">
     <div class="container" style="position: center; text-align: center;">
       <div class="textwidget"><img src="http://www.wffpitchin.org/wp-content/uploads/2017/03/footer-logo.png" alt="Wood Family Foundation" width="335" height="147"></a>
       </div>
     </div>
-</footer>
+  </footer>
 
 
     <script src="js/jquery-1.11.3.min.js"></script>
