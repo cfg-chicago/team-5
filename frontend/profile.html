@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.uploadPreview.min.js"></script>
 
 </head>
 <body>
@@ -40,6 +41,17 @@
              </datalist>
           </div>
            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+           <span class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img src="notification.png" style="max-width: 22px;">
+                          <span class="caret"></span>
+              </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="float: left;">
+                  <li>Milestone Projects soon!</li>
+                  <li>No class tomorrow</li>
+                  <li>Code for Good is good</li>
+                </ul>
+            </span>
         </form>
 
         <ul class="nav navbar-nav navbar-right">
@@ -97,9 +109,10 @@
             </div>
             <nav class="navbar navbar-default" style = " margin-top: 8px; margin-left: 210px; margin-right: 127px;">
               <ul class="nav navbar-nav">
-                <li><a href="profile.html" onClick="displayCategory('all')"> All </a></li>
-                <li><a href="#"> Milestone </a></li>
-                <li><a href="achievements.html"> Achievements </a></li>
+
+                <li><a href="#" onClick="displayCategory('all')"> All </a></li>
+                <li><a href="#" onClick="displayCategory('milestone')"> Milestone </a></li>
+               <li><a href="achievements.html"> Achievements </a></li>
               </ul>
             </nav>
         </div>
@@ -119,9 +132,16 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+
+          <div id="image-preview">
+            <input id="uploadImage" type="file" accept="image/*" />
+
+          </div>
+
+
         </div>
         <div class="modal-footer">
+          <button onclick="test()" type="button" class="btn btn-default" data-dismiss="modal">Post</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -132,12 +152,16 @@
     <!-- Postings -->
     <div class="container">
 
+      <div style="padding-right: 10px;">
+     <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Post</button>
+    </div>
+
+
 
       <ul class="grid effect-1" id="grid">
-      
+        
 
       </ul>
-
 
 
     </div>
@@ -146,6 +170,29 @@
     
 
     <script type="text/javascript">
+
+      var input = document.getElementById('uploadImage');
+
+      input.onchange = function(evt){
+          var tgt = evt.target || window.event.srcElement, 
+              files = tgt.files;
+          if (FileReader && files && files.length) {
+              var fr = new FileReader();
+              fr.onload = function () {
+                var images = JSON.parse(localStorage.getItem("userData") || "[]");
+                images.push(fr.result);
+                localStorage['userData'] = JSON.stringify(images);
+                document.getElementById('grid').innerHTML = '<li><img alt="Embedded Image" src="'+fr.result+'" style="width:304px;height:228px;"></li>' + document.getElementById('grid').innerHTML;
+                new AnimOnScroll( document.getElementById( 'grid' ), {
+                  minDuration : 0.4,
+                  maxDuration : 0.7,
+                  viewportFactor : 0.2
+                } );
+              }
+              fr.readAsDataURL(files[0]);
+          }
+      }
+
       
 function achievementOrMilestone() {
   // randomly assign the post a type
@@ -153,14 +200,14 @@ function achievementOrMilestone() {
     return "milestone";
   }
   else {
-    return "achievement";
+    return "post";
   }
 }
 
 function displayCategory(cat) {
 
 
-      var slides = document.getElementsByClassName('achievement');
+      var slides = document.getElementsByClassName('post');
   for (var i = 0; i < slides.length; i++)
   {
     //slides[i].style.border = "10px solid #FF00FF";
@@ -175,7 +222,7 @@ function displayCategory(cat) {
   }
   if (cat == 'milestone')
   {
-      var slides = document.getElementsByClassName('achievement');
+      var slides = document.getElementsByClassName('post');
   for (var i = 0; i < slides.length; i++)
   {
     //slides[i].style.border = "10px solid #FF00FF";
@@ -183,7 +230,7 @@ function displayCategory(cat) {
   }
   }
 
-else if (cat == 'achievement')
+else if (cat == 'post')
 {
     var slides = document.getElementsByClassName('milestone');
   for (var i = 0; i < slides.length; i++)
@@ -199,6 +246,15 @@ else if (cat == 'achievement')
 }
 
       function generatePostings() {
+        var images = JSON.parse(localStorage.getItem("userData") || "[]");
+        if(images.length > 0) {
+          for(var i = 0; i < images.length; i++) {
+            document.getElementById('grid').innerHTML += '<li><img src="'+images[i]+'" style="width:304px;height:228px;"></li>';
+          }
+        }
+
+
+
         var list = [1,2,3,4,5,6,7,8,9,
                     1,2,3,4,5,6,7,8,9,
                     1,2,3,4,5,6,7,8,9,
@@ -211,13 +267,23 @@ else if (cat == 'achievement')
       }
 
 
-      generatePostings()
-           // displayCategory()
-      new AnimOnScroll( document.getElementById( 'grid' ), {
-        minDuration : 0.4,
-        maxDuration : 0.7,
-        viewportFactor : 0.2
-      } );
+      $(document).ready(function() {
+        generatePostings()
+        new AnimOnScroll( document.getElementById( 'grid' ), {
+          minDuration : 0.4,
+          maxDuration : 0.7,
+          viewportFactor : 0.2
+        } );
+
+        $.uploadPreview({
+          input_field: "#image-upload",
+          preview_box: "#image-preview",
+          label_field: "#image-label"
+        });
+
+
+    });
+
     </script>
 
 
