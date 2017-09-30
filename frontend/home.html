@@ -57,7 +57,7 @@ body  {
         <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="#"><img src="home.png" style="max-width: 22px;"></a></li>
             <li><a href="search.html"><img src="magnifyingglass.png" style="max-width: 22px;"></a></li>
-            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 22px;"></a></li>
+            <li><a href="profile.html"><img src="smiley-face.png" style="max-width: 22px;">  Teddy Kim</a></li>
         </ul>
       </div>
     </nav>
@@ -81,8 +81,10 @@ body  {
       
       function generatePostings() {
         var images = JSON.parse(localStorage.getItem("userData") || "[]");
+        console.log(images.length);
         if(images.length > 0) {
-          for (var i = 0; i < images.length; i++) {
+          for (var i = 0; i < images.length && i < 20; i++) {
+            
             document.getElementById('grid').innerHTML += '<li><img src="'+images[i]+'" style="width:304px;height:228px;"></li>';
           }
         }

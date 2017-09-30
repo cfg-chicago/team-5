@@ -109,10 +109,9 @@
             </div>
             <nav class="navbar navbar-default" style = " margin-top: 8px; margin-left: 210px; margin-right: 127px;">
               <ul class="nav navbar-nav">
-
                 <li><a href="#" onClick="displayCategory('all')"> All </a></li>
                 <li><a href="#" onClick="displayCategory('milestone')"> Milestone </a></li>
-               <li><a href="achievements.html"> Achievements </a></li>
+                <li><a href="#" Achievements> Achievements </a></li>
               </ul>
             </nav>
         </div>
@@ -154,9 +153,19 @@
       <div style="padding-right: 10px;">
      <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Post</button>
     </div>
+
+
+
       <ul class="grid effect-1" id="grid">
+        
+
       </ul>
+
+
     </div>
+
+    
+    
 
     <script type="text/javascript">
 
@@ -168,7 +177,8 @@
           if (FileReader && files && files.length) {
               var fr = new FileReader();
               fr.onload = function () {
-                var images = [fr.result] + JSON.parse(localStorage.getItem("userData") || "[]");
+                var images = JSON.parse(localStorage.getItem("userData") || "[]");
+                images.push(fr.result);
                 localStorage['userData'] = JSON.stringify(images);
                 document.getElementById('grid').innerHTML = '<li><img alt="Embedded Image" src="'+fr.result+'" style="width:304px;height:228px;"></li>' + document.getElementById('grid').innerHTML;
                 new AnimOnScroll( document.getElementById( 'grid' ), {
@@ -287,3 +297,4 @@ else if (cat == 'post')
 
   </body>
 </html>
+git pu
